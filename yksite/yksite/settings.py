@@ -53,6 +53,10 @@ ROOT_URLCONF = 'yksite.urls'
 
 WSGI_APPLICATION = 'yksite.wsgi.application'
 
+TEMPLATE_DIRS = (
+#       'd:/develop/eclipse_kelper/workspace/SKTGOTO/templates',
+        os.path.join(BASE_DIR,'templates' ),
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
