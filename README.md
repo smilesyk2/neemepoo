@@ -1,5 +1,5 @@
 # neemepoo
-yksung's private development room, not for public use, but i opened it!
+yksung's practicing room, so not for public use, but i opened it!
 
 ## 2015-04-16
 * 첫 생성!
