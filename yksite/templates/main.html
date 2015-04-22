@@ -13,10 +13,14 @@ table {border:1px}
 	</tr>
 	{% for result in resultObj %}
 	<tr>
-		<td>{{result.DOCID}}</td>
-		<td>{{result.TITLE}}</td>
-		<td>{{result.CONTENT}}</td>
+		<td>{{result.Field.DOCID}}</td>
+		<td>{{result.Field.TITLE}}</td>
+		<td>{{result.Field.CONTENT}}</td>
 	</tr>
 	{% endfor %}
 </table>
+<div>
+<p>검색결과 원본</p>
+{{json}}
+</div>
 {% endblock %}
