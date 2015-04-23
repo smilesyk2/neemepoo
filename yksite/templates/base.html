@@ -17,36 +17,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 	<script src="{% static 'js/bootstrap.min.js'%}"></script>
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
 </head>
 <body>
 <div id="wrapper">
-	<!-- Sidebar -->
-	<div id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-			<li class="sidebar-brand"><a href="#">Start Bootstrap</a></li>
-        	<li><a href="#">Dashboard</a></li>
-        	<li><a href="#">Shortcuts</a></li>
-        	<li><a href="#">Overview</a></li>
-        	<li><a href="#">Events</a></li>
-        	<li><a href="#">About</a></li>
-        	<li><a href="#">Services</a></li>
-        	<li><a href="#">Contact</a></li>
-    	</ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
-	<div id="page-content-wrapper">
-		{% block content %}
-	    
-		<h1>Hello, world!</h1>
-	    
-		{% endblock %}
-	</div>
+	{% block content %}
+	hello world
+	{% endblock %}
 </body>
 </html>

@@ -4,28 +4,54 @@
 <style>
 table {border:1px}
 </style>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-12">
-			<h1>검색 결과 화면</h1>
-			<p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-			<p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-			<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-			<table>
-				<tr>
-					<th>카테고리</th>
-					<th>제목</th>
-					<th>내용</th>
-				</tr>
-				{% for result in resultObj %}
-				<tr>
-					<td>{{result.Field.DOCID}}</td>
-					<td>{{result.Field.TITLE}}</td>
-					<td>{{result.Field.CONTENT}}</td>
-				</tr>
-				{% endfor %}
-			</table>
-        </div>
-    </div>
+<script>
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("toggled");
+});
+function goCollection(col){
+	$("input:hidden[name='collection']").val(col);
+	$("form").submit();
+}
+function goSearch(){
+	$("form").submit();
+}
+</script>
+<form name='search' action='/search/' method='post'>
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+	<ul class="sidebar-nav">
+		<li class="sidebar-brand"><a href="#">Start Bootstrap</a></li>
+       	<li><a href="#" onclick="goCollection('sample_kms')">sample_kms</a></li>
+       	<li><a href="#" onclick="goCollection('sample_edu')">sample_edu</a></li>
+       	<li><a href="#" onclick="goCollection('sample_terms')">sample_terms</a></li>
+   	</ul>
+   </div>
+   <!-- /#sidebar-wrapper -->
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<input type='hidden' name='collection' value='{{data.collection}}'/>
+				<input type='text' name='query' value='{{data.query}}'/><button class="btn btn-default" onclick="goSearch()">search</button>
+				<!-- <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> -->
+				<table>
+					<tr>
+						<th>카테고리</th>
+						<th>제목</th>
+						<th>내용</th>
+					</tr>
+					{% for result in resultObj %}
+					<tr>
+						<td>{{result.Field.DOCID}}</td>
+						<td>{{result.Field.TITLE}}</td>
+						<td>{{result.Field.CONTENT}}</td>
+					</tr>
+					{% endfor %}
+				</table>
+	        </div>
+	    </div>
+	</div>
 </div>
+</form>
 {% endblock %}
