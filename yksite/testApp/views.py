@@ -28,7 +28,7 @@ def search(request):
         print '@@@ data :::', json.dumps(data)
         
     print url
-    req = urllib2.Request(url, json.dumps(data)) if data!='' else urllib2.Request(url)
+    req = urllib2.Request(url, urllib.urlencode(data)) if data!='' else urllib2.Request(url)
     # Read the response
     response = urllib2.urlopen(req).read()
     
