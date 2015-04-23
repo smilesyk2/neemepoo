@@ -38,5 +38,4 @@ def search(request):
     print resultObj
     
     return render_to_response('main.html', {"resultObj": resultObj
-                                            , "data" : json.dumps(data)
-                                            , "json" : json.dumps(result)})
+                                            , "data" : data })
