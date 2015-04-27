@@ -33,7 +33,8 @@ def search(request):
     response = urllib2.urlopen(req).read()
     
     result = json.loads(response)
-    resultObj = result['SearchQueryResult']['Collection'][0]['DocumentSet']['Document']
+    #resultObj = result['SearchQueryResult']['Collection'][0]['DocumentSet']['Document']
+    resultObj = result['SearchQueryResult']
     
     print resultObj
     
