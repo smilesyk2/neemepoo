@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+{% load make_range %}
+{% load replace_str %}
+{% load staticfiles %}
+<style>
+span.strong {font-weight:bold; color:red}
+#table-2 {
+	border: 1px solid #e3e3e3;
+	background-color: #f2f2f2;
+    width: 100%;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+}
+#table-2 td, #table-2 th {
+	padding: 5px;
+	color: #333;
+}
+#table-2 thead {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	padding: .2em 0 .2em .5em;
+	text-align: left;
+	color: #4B4B4B;
+	background-color: #C8C8C8;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#e3e3e3), color-stop(.6,#B3B3B3));
+	background-image: -moz-linear-gradient(top, #D6D6D6, #B0B0B0, #B3B3B3 90%);
+	border-bottom: solid 1px #999;
+}
+#table-2 th {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 17px;
+	line-height: 20px;
+	font-style: normal;
+	font-weight: normal;
+	text-align: left;
+	text-shadow: white 1px 1px 1px;
+}
+#table-2 td {
+	line-height: 20px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	border-bottom: 1px solid #fff;
+	border-top: 1px solid #fff;
+}
+#table-2 td:hover {
+	background-color: #fff;
+}
+</style>
+<script>
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("toggled");
+});
+function goCollection(col){
+	$("input:hidden[name='collection']").val(col);
+	$("form").submit();
+}
+function goSearch(){
+	$("form").submit();
+}
+</script>
+<form name='search' action='/search/' method='post'>
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+	<ul class="sidebar-nav">
+		<li class="sidebar-brand"><a href="#">검색카테고리</a></li>
+		<li><a href="#" onclick="goCollection('ALL')">ALL</a></li>
+       	<li><a href="#" onclick="goCollection('sample_kms')">sample_kms</a></li>
+       	<li><a href="#" onclick="goCollection('sample_edu')">sample_edu</a></li>
+       	<li><a href="#" onclick="goCollection('sample_terms')">sample_terms</a></li>
+       	<li><a href="#" onclick="goCollection('sample_bbs')">sample_bbs</a></li>
+   	</ul>
+   </div>
+   <!-- /#sidebar-wrapper -->
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<input type='hidden' name='collection' value='{{data.collection}}'/>
+				<input type='text' name='query' value='{{data.query}}'/><button class="btn btn-default" onclick="goSearch()">search</button>
+				<!-- <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> -->
+				<br>
+				{% for collection in resultObj.Collection %}
+				{{ collection.Id }}({{collection.DocumentSet.TotalCount}})
+				<table id="table-2" width='100%'>
+					<thead>
+					{% for key, value in collection.DocumentSet.Document.0.Field.items %}
+						{%if key == 'CONTENT' %}
+						<th width='40%'>{{key}}</th>
+						{% else %}
+						<th>{{key}}</th>
+						{% endif%}
+					{% endfor %}
+					</thead>
+					<tbody>
+					{% for i in collection.DocumentSet.Count|make_range %}
+					<tr>
+						{% for key, value in collection.DocumentSet.Document.0.Field.items %}
+							{%if key == 'CONTENT' %}
+						<td>{{value}}</td>
+							{%else%}
+						<td>{{value}}</td>	
+							{% endif%}
+						{% endfor %}
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% endfor %}
+	        </div>
+	    </div>
+	</div>
+</div>
+</form>
+{% endblock %}
