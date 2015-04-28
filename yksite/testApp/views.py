@@ -9,6 +9,8 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+
+
 # Create your views here.
 def home(request):
     return render_to_response('index.html')
@@ -36,7 +38,8 @@ def search(request):
     #resultObj = result['SearchQueryResult']['Collection'][0]['DocumentSet']['Document']
     resultObj = result['SearchQueryResult']
     
-    print resultObj
+    print '[search] resultObj', resultObj
     
     return render_to_response('main.html', {"resultObj": resultObj
                                             , "data" : data })
+    
