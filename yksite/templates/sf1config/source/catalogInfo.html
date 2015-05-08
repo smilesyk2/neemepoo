@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load staticfiles %}
+<form name='sourceConfigForm' action=''>
+	{{ wizard.management_form }}
+	{% if wizard.form.forms %}
+		{{ wizard.form.management_form }}
+		{%for form in wizard.form.forms %}
+			{{ form }}
+		{% endfor %}
+	{% else %}
+		{{ wizard.form }}
+	{% endif %}
+</form>
+{% endblock %}

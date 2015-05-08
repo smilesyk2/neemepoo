@@ -10,6 +10,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
+    
 
 # Create your views here.
 def home(request):
